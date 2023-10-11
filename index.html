@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="estilos/css.css" />
+	<link rel="icon" href="imagens/bolsa.png" />
+	<title>Conta Bancária</title>
+</head>
+<body>	
+	<header>
+		<ul>
+			<li id="link_importar">Importar</li>
+			<li id="link_saldo">Saldo</li>
+			<li id="link_extrato">Extrato</li>
+		</ul>
+		<h1 id="link_home">Controle de Conta Bancária</h1>	
+		<span id="exibe_data"></span>	
+	</header>
+
+	<main>
+		<div id="home">
+			<img src="imagens/dinheiro.gif" alt="Controle de Conta Bancária" />
+		</div>	
+		
+		<div id="imp" class="esconde">
+			<h2>Importar</h2>
+			<!-- O Firefox não limpa os campos (FILE SELECTOR) e nem volta ao índice 0 ao recriar 
+			 as opções da Lista de Seleção (deixa pré selecionado uma opção). Também não limpa os campos
+			quando ocorre REFRESH. Por isso, é necessário forçar o reset ao carregar a página -->
+			<form id="form_importar">
+				<h4>Opção 1 - Escolher o Arquivo:</h4>
+				<div>
+					<input type="file" id="input_sel_arq" />
+				</div>
+
+				<h4>Opção 2 - Local na Nuvem (mesmo servidor):</h4>
+				<div>
+					<input type="text" id="input_url_nuvem" maxlength="100" 
+						placeholder="URL do arquivo no mesmo servidor deste site" />
+					<input type="button" id="bt_car_arq_nuv" value="Carregar Arquivo Nuvem" />
+				</div>
+			</form>
+		</div>
+		
+		<div id="res_imp" class="esconde">
+			<h2>Resultado Importação:</h2>
+		
+			<p>Visualização do Conteúdo do arquivo numa Tabela:</p>
+			<table id="tab_geral"></table>
+		</div>	
+		
+		<div id="saldo" class="esconde">
+			<h2>Saldo</h2>			
+			<div>
+				<!-- O Firefox não limpa os campos (FILE SELECTOR) e nem volta ao índice 0 ao recriar 
+				 as opções da Lista de Seleção (deixa pré selecionada uma opção) -->
+				<form id="form_saldo">
+					<h4>Selecionar a Conta:</h4>
+					<select id="sel_conta_saldo">
+						<option value="" selected disabled>Escolha...</option>
+					</select>
+				</form>
+				<div class="container">
+					Saldo: 
+					<input type="text" id="input_saldo" disabled />
+					<img src="imagens/interrog.png" id="img_situacao" alt="Situação da Conta" />
+				</div>
+			</div>
+		</div>
+		
+		<div id="ext" class="esconde">
+			<h2>Extrato</h2>			
+			<div>
+				<!-- Utiliza um formulário para os campos da tela de extrato, pois é necessário
+				 limpar as seleções realizadas anteriormente quando volta a carregar esta tela.
+				 A limpeza do INPUT do tipo DATE (com DATEPICKER) não funciona só limpando o 
+				 value do INPUT. Também tem o problema do Firefox, que não volta ao índice 0
+				 ao recriar as opções da Lista de Seleção (deixa pré selecionada uma opção)-->
+				<form id="form_extrato">
+					<h4>Selecionar a Conta:</h4>
+					<select id="sel_conta_extrato">
+						<option value="" selected disabled>Escolha...</option>
+					</select>
+					<h4>Selecionar a Data de Início do Período:</h4>
+					<!-- Para indicar um value no campo tipo date, deve ser usado 
+					o formato YYYY-MM-DD -->
+					<input type="date" id="input_data_ini" />
+					<h4>Selecionar a Data de Fim do Período:</h4>
+					<input type="date" id="input_data_fim" />
+				</form>
+				<br /><br />
+				<input type="button" id="bt_extrato" value="Gerar Extrato" />
+			</div>
+		</div>
+		
+		<div id="res_ext" class="esconde">
+			<h2>Resultado Extrato - Conta: <span id="conta_extrato"></span></h2>
+			<table id="tab_ext"></table>
+		</div>		
+		
+	</main>		
+	<script src="scripts/scripts.js"></script>
+</body>
+</html>
